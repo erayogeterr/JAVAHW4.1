@@ -12,7 +12,7 @@ import kodlama.io.SpringHW.entities.concretes.ProgrammingLanguage;
 public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	
 	private ProgrammingLanguageRepository programmingLanguageRepository;
-
+	
 	
 	@Autowired
 	public ProgrammingLanguageManager(ProgrammingLanguageRepository programmingLanguageRepository) {

@@ -11,5 +11,5 @@ public interface ProgrammingLanguageRepository {
 	ProgrammingLanguage addProgrammingLanguage(ProgrammingLanguage programmingLanguage) throws Exception;
 	ProgrammingLanguage updateProgrammingLanguage(int programmingLanguageId, ProgrammingLanguage programmingLanguage);
 	void deleteProgrammingLanguage(int programmingLanguageId);
-
+	boolean isNameExist(ProgrammingLanguage programmingLanguage);
 }
