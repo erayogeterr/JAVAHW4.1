@@ -1,7 +1,6 @@
 package kodlama.io.SpringHW.business.concretes;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlama.io.SpringHW.business.abstracts.ProgrammingLanguageService;
@@ -13,8 +12,6 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	
 	private ProgrammingLanguageRepository programmingLanguageRepository;
 	
-	
-	@Autowired
 	public ProgrammingLanguageManager(ProgrammingLanguageRepository programmingLanguageRepository) {
 		this.programmingLanguageRepository = programmingLanguageRepository;
 	}
@@ -33,6 +30,9 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	public ProgrammingLanguage addProgrammingLanguage(ProgrammingLanguage programmingLanguage) throws Exception {
 		if (isNameBlankAndEmpty(programmingLanguage)) {
 			throw new Exception("Programlama Dili Boş Geçilemez");
+		}
+		else if (isNameExist(programmingLanguage)) {
+			throw new Exception("Programlama Dili Tekrar Edemez.");
 		}
 		return programmingLanguageRepository.addProgrammingLanguage(programmingLanguage);
 	}
@@ -54,6 +54,14 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 		}
 		return false;
 	}
-
-
+	
+	@Override
+	public boolean isNameExist(ProgrammingLanguage programmingLanguage) {
+		for(ProgrammingLanguage programmingL : programmingLanguageRepository.getAll()) {
+			if (programmingL.getName().equalsIgnoreCase(programmingLanguage.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

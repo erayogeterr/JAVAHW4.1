@@ -17,4 +17,7 @@ public interface ProgrammingLanguageService {
 	ProgrammingLanguage updateProgrammingLanguage(int id, ProgrammingLanguage programmingLanguage);
 	
 	boolean isNameBlankAndEmpty(ProgrammingLanguage programmingLanguage);
+	
+	boolean isNameExist(ProgrammingLanguage programmingLanguage);
+	
 }

@@ -9,16 +9,16 @@ import kodlama.io.SpringHW.dataAccess.abstracts.ProgrammingLanguageRepository;
 import kodlama.io.SpringHW.entities.concretes.ProgrammingLanguage;
 
 @Repository
-public class InMemoryProgrammingLanguageRepository implements ProgrammingLanguageRepository{
+public class InMemoryProgrammingLanguageRepository implements ProgrammingLanguageRepository {
 
 	List<ProgrammingLanguage> programmingLanguages;
-	
+
 	public InMemoryProgrammingLanguageRepository() {
 		programmingLanguages = new ArrayList<ProgrammingLanguage>();
 		programmingLanguages.add(new ProgrammingLanguage(0, "boş"));
-		programmingLanguages.add(new ProgrammingLanguage(1,"C#"));
-		programmingLanguages.add(new ProgrammingLanguage(2,"Java"));
-		programmingLanguages.add(new ProgrammingLanguage(3,"Python"));
+		programmingLanguages.add(new ProgrammingLanguage(1, "C#"));
+		programmingLanguages.add(new ProgrammingLanguage(2, "Java"));
+		programmingLanguages.add(new ProgrammingLanguage(3, "Python"));
 	}
 
 	@Override
@@ -33,34 +33,21 @@ public class InMemoryProgrammingLanguageRepository implements ProgrammingLanguag
 
 	@Override
 	public ProgrammingLanguage addProgrammingLanguage(ProgrammingLanguage programmingLanguage) throws Exception {
-		
-		if (isNameExist(programmingLanguage)) {
-			throw new Exception("Programlama dili tekrar edemez.");
-		}
-		
+
 		programmingLanguages.add(programmingLanguage);
 		return programmingLanguage;
+
 	}
 
 	@Override
-	public ProgrammingLanguage updateProgrammingLanguage( int programmingLanguageId,ProgrammingLanguage programmingLanguage) {
+	public ProgrammingLanguage updateProgrammingLanguage(int programmingLanguageId,
+			ProgrammingLanguage programmingLanguage) {
 		programmingLanguages.set(programmingLanguageId, programmingLanguage);
 		return null;
 	}
 
 	@Override
-	public void deleteProgrammingLanguage(int programmingLanguageId) {	
+	public void deleteProgrammingLanguage(int programmingLanguageId) {
 		programmingLanguages.remove(programmingLanguageId);
 	}
-	
-	@Override
-	public boolean isNameExist(ProgrammingLanguage programmingLanguage) {
-		for (ProgrammingLanguage pL : programmingLanguages) {
-			if (pL.getName().equals(programmingLanguage.getName())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 }
