@@ -15,4 +15,6 @@ public interface ProgrammingLanguageService {
 	void deleteProgrammingLanguage(int programmingLanguageId);
 
 	ProgrammingLanguage updateProgrammingLanguage(int id, ProgrammingLanguage programmingLanguage);
+	
+	boolean isNameBlankAndEmpty(ProgrammingLanguage programmingLanguage);
 }

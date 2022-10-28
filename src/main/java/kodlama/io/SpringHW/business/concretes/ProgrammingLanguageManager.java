@@ -13,6 +13,7 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	
 	private ProgrammingLanguageRepository programmingLanguageRepository;
 
+	
 	@Autowired
 	public ProgrammingLanguageManager(ProgrammingLanguageRepository programmingLanguageRepository) {
 		this.programmingLanguageRepository = programmingLanguageRepository;
@@ -30,7 +31,7 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
 	@Override
 	public ProgrammingLanguage addProgrammingLanguage(ProgrammingLanguage programmingLanguage) throws Exception {
-		if (programmingLanguage.getName().isEmpty() || programmingLanguage.getName().isBlank()) {
+		if (isNameBlankAndEmpty(programmingLanguage)) {
 			throw new Exception("Programlama Dili Boş Geçilemez");
 		}
 		return programmingLanguageRepository.addProgrammingLanguage(programmingLanguage);
@@ -46,9 +47,13 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 		programmingLanguageRepository.deleteProgrammingLanguage(programmingLanguageId);
 	}
 
-	
-	
-	
-	
+	@Override
+	public boolean isNameBlankAndEmpty(ProgrammingLanguage programmingLanguage) {
+		if(programmingLanguage.getName().isEmpty() || programmingLanguage.getName().isBlank()) {
+			return true;
+		}
+		return false;
+	}
+
 
 }

@@ -34,11 +34,10 @@ public class InMemoryProgrammingLanguageRepository implements ProgrammingLanguag
 	@Override
 	public ProgrammingLanguage addProgrammingLanguage(ProgrammingLanguage programmingLanguage) throws Exception {
 		
-		for (ProgrammingLanguage pL : programmingLanguages) {
-			if (pL.getName().equals(programmingLanguage.getName())) {
-				throw new Exception("Aynı isimde programlama dili mevcut.");
-			}
+		if (isNameExist(programmingLanguage)) {
+			throw new Exception("Programlama dili tekrar edemez.");
 		}
+		
 		programmingLanguages.add(programmingLanguage);
 		return programmingLanguage;
 	}
@@ -52,6 +51,15 @@ public class InMemoryProgrammingLanguageRepository implements ProgrammingLanguag
 	@Override
 	public void deleteProgrammingLanguage(int programmingLanguageId) {	
 		programmingLanguages.remove(programmingLanguageId);
+	}
+	
+	public boolean isNameExist(ProgrammingLanguage programmingLanguage) {
+		for (ProgrammingLanguage pL : programmingLanguages) {
+			if (pL.getName().equals(programmingLanguage.getName())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
