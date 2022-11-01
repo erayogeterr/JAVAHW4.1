@@ -5,7 +5,7 @@ import java.util.List;
 import kodlama.io.SpringHW.entities.concretes.ProgrammingLanguage;
 
 public interface ProgrammingLanguageService {
-	
+
 	List<ProgrammingLanguage> getAll();
 
 	ProgrammingLanguage getProgrammingLanguageById(int programmingLanguageId);
@@ -15,9 +15,9 @@ public interface ProgrammingLanguageService {
 	void deleteProgrammingLanguage(int programmingLanguageId);
 
 	ProgrammingLanguage updateProgrammingLanguage(int id, ProgrammingLanguage programmingLanguage);
-	
+
 	boolean isNameBlankAndEmpty(ProgrammingLanguage programmingLanguage);
-	
+
 	boolean isNameExist(ProgrammingLanguage programmingLanguage);
-	
+
 }

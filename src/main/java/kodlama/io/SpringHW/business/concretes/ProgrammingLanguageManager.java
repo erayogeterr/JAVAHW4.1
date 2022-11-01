@@ -1,4 +1,5 @@
 package kodlama.io.SpringHW.business.concretes;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -9,9 +10,9 @@ import kodlama.io.SpringHW.entities.concretes.ProgrammingLanguage;
 
 @Service
 public class ProgrammingLanguageManager implements ProgrammingLanguageService {
-	
+
 	private ProgrammingLanguageRepository programmingLanguageRepository;
-	
+
 	public ProgrammingLanguageManager(ProgrammingLanguageRepository programmingLanguageRepository) {
 		this.programmingLanguageRepository = programmingLanguageRepository;
 	}
@@ -29,16 +30,16 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	@Override
 	public ProgrammingLanguage addProgrammingLanguage(ProgrammingLanguage programmingLanguage) throws Exception {
 		if (isNameBlankAndEmpty(programmingLanguage)) {
-			throw new Exception("Programlama Dili Boş Geçilemez");
-		}
-		else if (isNameExist(programmingLanguage)) {
-			throw new Exception("Programlama Dili Tekrar Edemez.");
+			throw new Exception("Programming Language Cannot be Empty.");
+		} else if (isNameExist(programmingLanguage)) {
+			throw new Exception("The Programming Language Cannot Repeat.");
 		}
 		return programmingLanguageRepository.addProgrammingLanguage(programmingLanguage);
 	}
 
 	@Override
-	public ProgrammingLanguage updateProgrammingLanguage(int programmingLanguageId, ProgrammingLanguage programmingLanguage) {
+	public ProgrammingLanguage updateProgrammingLanguage(int programmingLanguageId,
+			ProgrammingLanguage programmingLanguage) {
 		return programmingLanguageRepository.updateProgrammingLanguage(programmingLanguageId, programmingLanguage);
 	}
 
@@ -49,15 +50,15 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
 	@Override
 	public boolean isNameBlankAndEmpty(ProgrammingLanguage programmingLanguage) {
-		if(programmingLanguage.getName().isEmpty() || programmingLanguage.getName().isBlank()) {
+		if (programmingLanguage.getName().isEmpty() || programmingLanguage.getName().isBlank()) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean isNameExist(ProgrammingLanguage programmingLanguage) {
-		for(ProgrammingLanguage programmingL : programmingLanguageRepository.getAll()) {
+		for (ProgrammingLanguage programmingL : programmingLanguageRepository.getAll()) {
 			if (programmingL.getName().equalsIgnoreCase(programmingLanguage.getName())) {
 				return true;
 			}

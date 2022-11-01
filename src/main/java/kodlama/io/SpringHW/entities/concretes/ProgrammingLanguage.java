@@ -1,12 +1,12 @@
 package kodlama.io.SpringHW.entities.concretes;
 
 public class ProgrammingLanguage {
-	
+
 	private int id;
 	private String name;
-	
+
 	public ProgrammingLanguage() {
-		
+
 	}
 
 	public ProgrammingLanguage(int id, String name) {
@@ -29,9 +29,5 @@ public class ProgrammingLanguage {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	
-	
 
 }
