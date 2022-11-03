@@ -1,6 +1,7 @@
 package kodlama.io.SpringHW.business.concretes;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -18,35 +19,47 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	}
 
 	@Override
-	public List<ProgrammingLanguage> getAll() {
-		return programmingLanguageRepository.getAll();
+	public List<ProgrammingLanguage> getAllProgrammingLanguages() {
+		return programmingLanguageRepository.findAll();
 	}
 
 	@Override
-	public ProgrammingLanguage getProgrammingLanguageById(int programmingLanguageId) {
-		return programmingLanguageRepository.getProgrammingLanguageById(programmingLanguageId);
-	}
+	public ProgrammingLanguage getProgrammingLanguageById(Long programmingLanguageId) {
+		return programmingLanguageRepository.findById(programmingLanguageId).orElse(null);
+
+	}	
 
 	@Override
-	public ProgrammingLanguage addProgrammingLanguage(ProgrammingLanguage programmingLanguage) throws Exception {
+	public ProgrammingLanguage saveProgrammingLanguage(ProgrammingLanguage programmingLanguage) throws Exception {
+		
 		if (isNameBlankAndEmpty(programmingLanguage)) {
 			throw new Exception("Programming Language Cannot be Empty.");
 		} else if (isNameExist(programmingLanguage)) {
 			throw new Exception("The Programming Language Cannot Repeat.");
 		}
-		return programmingLanguageRepository.addProgrammingLanguage(programmingLanguage);
+		return programmingLanguageRepository.save(programmingLanguage);
+}
+
+	@Override
+	public ProgrammingLanguage updateProgrammingLanguage(ProgrammingLanguage programmingLanguage, Long programmingLanguageId) {
+		Optional<ProgrammingLanguage> existingProgrammingLanguage = programmingLanguageRepository.findById(programmingLanguageId);
+	
+		if (existingProgrammingLanguage.isPresent()) {
+			ProgrammingLanguage toUpdate = existingProgrammingLanguage.get();
+			toUpdate.setName(programmingLanguage.getName());
+			programmingLanguageRepository.save(toUpdate);
+			return toUpdate;
+		}
+		return null;
+
 	}
 
 	@Override
-	public ProgrammingLanguage updateProgrammingLanguage(int programmingLanguageId,
-			ProgrammingLanguage programmingLanguage) {
-		return programmingLanguageRepository.updateProgrammingLanguage(programmingLanguageId, programmingLanguage);
-	}
+	public void deleteProgrammingLanguage(Long programmingLanguageId) {
+		programmingLanguageRepository.deleteById(programmingLanguageId);
 
-	@Override
-	public void deleteProgrammingLanguage(int programmingLanguageId) {
-		programmingLanguageRepository.deleteProgrammingLanguage(programmingLanguageId);
 	}
+	
 
 	@Override
 	public boolean isNameBlankAndEmpty(ProgrammingLanguage programmingLanguage) {
@@ -58,11 +71,14 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
 	@Override
 	public boolean isNameExist(ProgrammingLanguage programmingLanguage) {
-		for (ProgrammingLanguage programmingL : programmingLanguageRepository.getAll()) {
+		for (ProgrammingLanguage programmingL : getAllProgrammingLanguages()) {
 			if (programmingL.getName().equalsIgnoreCase(programmingLanguage.getName())) {
 				return true;
 			}
 		}
 		return false;
 	}
+	
+
+
 }

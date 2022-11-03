@@ -26,28 +26,28 @@ public class ProgrammingLanguagesController {
 
 	@GetMapping("/getall")
 	public List<ProgrammingLanguage> getAll() {
-		return programmingLanguageService.getAll();
+		return programmingLanguageService.getAllProgrammingLanguages();
 	}
 
 	@GetMapping("{id}")
-	public ProgrammingLanguage getProgrammingLanguageById(@PathVariable("id") int programmingLanguageId) {
+	public ProgrammingLanguage getProgrammingLanguageById(@PathVariable("id") Long programmingLanguageId) throws Exception {
 		return programmingLanguageService.getProgrammingLanguageById(programmingLanguageId);
 	}
 
 	@PostMapping
 	public ProgrammingLanguage addProgrammingLanguage(@RequestBody ProgrammingLanguage programmingLanguage)
 			throws Exception {
-		return programmingLanguageService.addProgrammingLanguage(programmingLanguage);
+		return programmingLanguageService.saveProgrammingLanguage(programmingLanguage);
 	}
 
 	@PutMapping("{id}")
-	public ProgrammingLanguage updateProgrammingLanguage(@PathVariable("id") int programmingLanguageId,
+	public ProgrammingLanguage updateProgrammingLanguage(@PathVariable("id") Long programmingLanguageId,
 			@RequestBody ProgrammingLanguage programmingLanguage) {
-		return programmingLanguageService.updateProgrammingLanguage(programmingLanguageId, programmingLanguage);
+		return programmingLanguageService.updateProgrammingLanguage(programmingLanguage, programmingLanguageId);
 	}
 
 	@DeleteMapping("{id}")
-	public void deleteProgrammingLanguage(@PathVariable("id") int programmingLanguageId) {
+	public void deleteProgrammingLanguage(@PathVariable("id") Long programmingLanguageId) throws Exception {
 		programmingLanguageService.deleteProgrammingLanguage(programmingLanguageId);
 	}
 }

@@ -6,15 +6,15 @@ import kodlama.io.SpringHW.entities.concretes.ProgrammingLanguage;
 
 public interface ProgrammingLanguageService {
 
-	List<ProgrammingLanguage> getAll();
+	List<ProgrammingLanguage> getAllProgrammingLanguages();
 
-	ProgrammingLanguage getProgrammingLanguageById(int programmingLanguageId);
+	ProgrammingLanguage getProgrammingLanguageById(Long programmingLanguageId);
 
-	ProgrammingLanguage addProgrammingLanguage(ProgrammingLanguage programmingLanguage) throws Exception;
+	ProgrammingLanguage saveProgrammingLanguage(ProgrammingLanguage programmingLanguage) throws Exception;
 
-	void deleteProgrammingLanguage(int programmingLanguageId);
+	ProgrammingLanguage updateProgrammingLanguage(ProgrammingLanguage programmingLanguage, Long programmingLanguageId);
 
-	ProgrammingLanguage updateProgrammingLanguage(int id, ProgrammingLanguage programmingLanguage);
+	void deleteProgrammingLanguage(Long programmingLanguageId);
 
 	boolean isNameBlankAndEmpty(ProgrammingLanguage programmingLanguage);
 
